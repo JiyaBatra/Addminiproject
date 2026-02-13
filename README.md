@@ -32,21 +32,22 @@ Every contribution helps others learn, grow, and inspire creativity.
 </p>
 
 ## 📂 Project Structure
+
 Addminiproject/
 │
 ├── Assest/ # Contains images, cursor gifs, and other media
-│ └── butterfly.gif # Cursor animation example
-├── projectforcontributor/ # Example mini projects folder
-│ ├── calculator.html # Cute pastel pink calculator example
+│ └── butterfly.gif # Example cursor animation
+├── projectforcontributor/ # Folder for mini projects submitted by contributors
+│ ├── calculator.html # Example pastel pink calculator project
 │ ├── calculator.css
 │ └── calculator.js
-├── index.html
-├── about.html
-├── contact.html
-├── contribute.html
-├── style.css
-├── script.js
-└── README.md
+├── index.html # Home page
+├── about.html # About page
+├── contact.html # Contact page
+├── contribute.html # Contribution guidelines page
+├── style.css # Main CSS
+├── script.js # Main JavaScript
+└── README.md # Project documentation
 
 
 ---
