@@ -1,124 +1,354 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-<header>
-    <h1 id="chead">Get in Touch ✨</h1>
-</header>
-
-<section class="contact-section">
-    <div class="contact-card">
-
-        <p><i class="fas fa-envelope"></i> Email: <a href="mailto:jiyabatra0007@gmail.com">jiyabatra0007@gmail.com</a></p>
-        <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/JiyaBatra" target="_blank">JiyaBatra</a></p>
-        <p><i class="fab fa-linkedin"></i> LinkedIn: <a href="https://www.linkedin.com/in/jiya-batra-12b02b289" target="_blank">Jiya Batra</a></p>
-        <p><i class="fab fa-discord"></i> Discord: <a href="https://discord.gg/PzvvW59g" target="_blank">Contribution help</a></p>
-
-    </div>
-</section>
-
-<!-- Butterfly Cursor + Sparkles -->
-<div class="cursor">
-</div>
-<div class="sparkle-container"></div>
-
-<script src="script.js"></script>
 <style>
-    /* Contact Section */
-.contact-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 80px 20px;
+
+/* ===== RESET ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
-/* Contact Card */
-.contact-card {
-    max-width: 600px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(15px);
-    border-radius: 25px;
-    padding: 50px 40px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+html,body{
+    overflow-x:clip; /* ✅ removes extra page */
 }
 
-.contact-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+body{
+    color:#fff;
+    position:relative;
+
+    background:
+        radial-gradient(circle at 20% 20%, #ff9ad5, transparent 40%),
+        radial-gradient(circle at 80% 30%, #8fa8ff, transparent 40%),
+        radial-gradient(circle at 50% 80%, #c3a6ff, transparent 40%),
+        #0f1020;
 }
 
-/* Paragraphs */
-.contact-card p {
-    font-size: 1.15rem;
-    margin: 25px 0;
-    line-height: 1.6;
-    transition: color 0.3s ease;
+/* ===== PAGE CENTER ===== */
+.page-center{
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:40px 0;
 }
 
-/* Links Styling */
-.contact-card a {
-    color: #7b6cf6;
-    font-weight: 600;
-    text-decoration: none;
-    position: relative;
-    padding-bottom: 2px;
-    transition: all 0.3s ease;
+/* ===== BACKGROUND BLOBS (FIXED) ===== */
+body::before,
+body::after{
+    content:"";
+    position:fixed; /* ⭐ prevents overflow */
+    width:400px;
+    height:400px;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:.5;
+    z-index:-1;
+    pointer-events:none;
 }
 
-.contact-card a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0%;
-    height: 2px;
-    background: #ff69b4;
-    border-radius: 2px;
-    transition: width 0.3s ease;
+body::before{
+    background:#ff69b4;
+    top:-100px;
+    left:-100px;
 }
 
-.contact-card a:hover {
-    color: #ff69b4;
+body::after{
+    background:#7b6cf6;
+    bottom:-120px;
+    right:-120px;
 }
 
-.contact-card a:hover::after {
-    width: 100%;
+/* ===== HEADER ===== */
+header h1{
+    font-size:2.6rem;
+    margin-bottom:40px;
+    text-align:center;
 }
 
-/* Icons Styling */
-.contact-card i {
-    margin-right: 12px;
-    font-size: 1.4rem;
-    color: #7b6cf6;
-    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+/* ===== LAYOUT ===== */
+.contact-wrapper{
+    width:90%;
+    max-width:1200px;
+    display:flex;
+    gap:40px;
+    align-items:stretch;
+    justify-content:center;
 }
 
-.contact-card i:hover {
-    transform: rotate(-10deg) scale(1.2);
-    color: #ff69b4;
-    text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ff69b4;
+@media (max-width:900px){
+    .contact-wrapper{
+        flex-direction:column;
+    }
 }
 
-#chead {
-    text-align: center;
+/* ===== CARDS ===== */
+.contact-card,
+.message-card{
+    flex:1;
+    padding:50px 45px;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(25px);
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:0 25px 60px rgba(0,0,0,0.35);
+}
+
+/* CONTACT CARD */
+.contact-card{
+    transition:.4s;
+}
+
+.contact-card:hover{
+    transform:translateY(-8px) scale(1.02);
+}
+
+.contact-item{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:18px 20px;
+    margin:18px 0;
+    border-radius:18px;
+    transition:.35s;
+}
+
+.contact-item:hover{
+    background:rgba(255,255,255,0.08);
+    transform:translateX(10px);
+}
+
+.contact-item i{
+    font-size:1.5rem;
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:linear-gradient(135deg,#7b6cf6,#ff69b4);
+    box-shadow:0 0 20px rgba(255,105,180,.4);
+}
+
+.contact-item span{
+    opacity:.8;
+}
+
+.contact-item a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.contact-item a:hover{
+    color:#ffd1ec;
+}
+
+.footer-note{
+    margin-top:25px;
+    text-align:center;
+    opacity:.7;
+}
+
+/* MESSAGE CARD */
+.message-card{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.message-card h2{
+    margin-bottom:30px;
+}
+
+/* INPUTS */
+.input-group{
+    position:relative;
+    margin:22px 0;
+}
+
+.input-group input,
+.input-group textarea{
+    width:100%;
+    padding:16px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.05);
+    color:white;
+    outline:none;
+}
+
+.input-group textarea{
+    resize:none;
+}
+
+.input-group label{
+    position:absolute;
+    left:16px;
+    top:50%;
+    transform:translateY(-50%);
+    color:rgba(255,255,255,0.6);
+    pointer-events:none;
+    transition:.3s;
+}
+
+.input-group textarea + label{
+    top:22px;
+}
+
+.input-group input:focus,
+.input-group textarea:focus{
+    border-color:#ff69b4;
+    box-shadow:0 0 12px rgba(255,105,180,.4);
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label,
+.input-group textarea:focus + label,
+.input-group textarea:valid + label{
+    top:-10px;
+    font-size:.8rem;
+    background:#0f1020;
+    padding:0 6px;
+    color:#ffb3de;
+}
+
+/* BUTTON */
+.send-btn{
+    width:100%;
+    padding:16px;
+    margin-top:15px;
+    border:none;
+    border-radius:14px;
+    font-size:1.1rem;
+    font-weight:600;
+    color:white;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ff4f8b,#ff7ab6);
+    transition:.35s;
+}
+
+.send-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(255,105,180,.5);
+}
+
+/* ===== FOOTER ===== */
+.site-footer{
+    width:100%;
+    text-align:center;
+    padding:20px 10px;
+    font-size:.9rem;
+    opacity:.7;
+    border-top:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px);
 }
 
 </style>
+</head>
+
+<body>
+
+<main class="page-center">
+
+<header>
+<h1>Get in Touch ✨</h1>
+</header>
+
+<section class="contact-wrapper">
+
+<!-- CONTACT INFO -->
+<div class="contact-card">
+
+<div class="contact-item">
+<i class="fas fa-envelope"></i>
+<div>
+<span>Email</span>
+<a href="mailto:jiyabatra0007@gmail.com">jiyabatra0007@gmail.com</a>
+</div>
+</div>
+
+<div class="contact-item">
+<i class="fab fa-github"></i>
+<div>
+<span>GitHub</span>
+<a href="https://github.com/JiyaBatra" target="_blank">JiyaBatra</a>
+</div>
+</div>
+
+<div class="contact-item">
+<i class="fab fa-linkedin"></i>
+<div>
+<span>LinkedIn</span>
+<a href="https://www.linkedin.com/in/jiya-batra-12b02b289" target="_blank">Jiya Batra</a>
+</div>
+</div>
+
+<div class="contact-item">
+<i class="fab fa-discord"></i>
+<div>
+<span>Community</span>
+<a href="https://discord.gg/PzvvW59g" target="_blank">Contribution Help</a>
+</div>
+</div>
+
+<p class="footer-note">💫 Always open to collaboration & creative ideas</p>
+
+</div>
+
+<!-- MESSAGE FORM -->
+<div class="message-card">
+
+<h2>Send a Message</h2>
+
+<form>
+
+<div class="input-group">
+<input type="text" required>
+<label>Your Name</label>
+</div>
+
+<div class="input-group">
+<input type="email" required>
+<label>Your Email</label>
+</div>
+
+<div class="input-group">
+<input type="text" required>
+<label>Subject</label>
+</div>
+
+<div class="input-group">
+<textarea rows="5" required></textarea>
+<label>Your Message</label>
+</div>
+
+<button class="send-btn">Send Message ✨</button>
+
+</form>
+
+</div>
+
+</section>
+
+</main>
+
+<footer class="site-footer">
+© 2026 Jiya Batra — All Rights Reserved.
+</footer>
+
 </body>
 </html>
