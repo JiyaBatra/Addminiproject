@@ -431,3 +431,276 @@ section p.card {
 .mini-projects .project-card {
     width: 220px;
 }
+
+/* ===== Home Header Redesign (main website) ===== */
+.home-header {
+    position: sticky;
+    top: 14px;
+    z-index: 200;
+    margin: 14px auto 0;
+    padding: 0 20px;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    backdrop-filter: none;
+    animation: none;
+}
+
+.home-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 14px 18px;
+    border-radius: 26px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 244, 250, 0.82), rgba(237, 248, 255, 0.84));
+    box-shadow: 0 16px 45px rgba(113, 79, 127, 0.18);
+    position: relative;
+    overflow: hidden;
+}
+
+.home-header-inner::before {
+    content: "";
+    position: absolute;
+    inset: -110% 42% auto -26%;
+    height: 210%;
+    background: linear-gradient(120deg, rgba(255, 169, 206, 0), rgba(255, 169, 206, 0.45), rgba(157, 200, 255, 0));
+    transform: rotate(13deg);
+    pointer-events: none;
+}
+
+.home-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #5f3f78;
+    position: relative;
+    z-index: 1;
+}
+
+.home-brand-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    font-size: 1.4rem;
+    background: linear-gradient(145deg, #ffd5e9, #fff3f9);
+    box-shadow: 0 8px 24px rgba(216, 124, 165, 0.28);
+}
+
+.home-brand-copy {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    gap: 4px;
+}
+
+.home-brand-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: #6d4e86;
+}
+
+.home-brand-tagline {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9972ab;
+    font-weight: 600;
+}
+
+.home-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.home-nav a {
+    text-decoration: none;
+    color: #6a4e77;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: transform 0.25s ease, color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.home-nav a:hover,
+.home-nav a:focus-visible {
+    color: #b23e86;
+    border-color: rgba(255, 152, 194, 0.35);
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 6px 16px rgba(255, 148, 193, 0.25);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.home-nav a.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, #ff86ba, #b17ff6);
+    box-shadow: 0 8px 20px rgba(191, 115, 185, 0.3);
+}
+
+.home-nav-toggle {
+    display: none;
+    width: 46px;
+    height: 46px;
+    border: 0;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.76);
+    box-shadow: 0 10px 24px rgba(108, 83, 134, 0.2);
+    cursor: pointer;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+    z-index: 2;
+}
+
+.home-nav-toggle span {
+    width: 20px;
+    height: 2px;
+    border-radius: 6px;
+    background: #7e5b96;
+    transition: transform 0.28s ease, opacity 0.2s ease;
+}
+
+@media (max-width: 900px) {
+    .home-header {
+        top: 8px;
+        padding: 0 12px;
+    }
+
+    .home-header-inner {
+        flex-wrap: wrap;
+        padding: 12px;
+        border-radius: 20px;
+        overflow: visible;
+    }
+
+    .home-nav-toggle {
+        display: none;
+    }
+
+    .home-nav {
+        position: static;
+        width: 100%;
+        margin-top: 10px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        padding: 12px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.88);
+        background: linear-gradient(140deg, rgba(255, 255, 255, 0.95), rgba(252, 239, 246, 0.94));
+        box-shadow: 0 20px 40px rgba(102, 74, 122, 0.2);
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+        z-index: 40;
+    }
+
+    .home-nav a {
+        text-align: center;
+    }
+    
+    .js-ready .home-header-inner {
+        flex-wrap: nowrap;
+    }
+
+    .js-ready .home-nav-toggle {
+        display: inline-flex;
+    }
+
+    .js-ready .home-nav {
+        position: absolute;
+        right: 12px;
+        top: calc(100% + 12px);
+        width: min(320px, calc(100vw - 36px));
+        margin-top: 0;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px) scale(0.98);
+        transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .js-ready .home-header.nav-open .home-nav {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+    }
+
+    .js-ready .home-header.nav-open .home-nav-toggle span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .js-ready .home-header.nav-open .home-nav-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .js-ready .home-header.nav-open .home-nav-toggle span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+}
+
+@media (max-width: 560px) {
+    .home-brand-title {
+        font-size: 1.1rem;
+    }
+
+    .home-brand-tagline {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .home-header-inner {
+        gap: 10px;
+    }
+
+    .home-brand {
+        gap: 10px;
+    }
+
+    .home-brand-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        font-size: 1.1rem;
+    }
+
+    .home-brand-tagline {
+        display: none;
+    }
+
+    .home-nav {
+        right: 8px;
+        width: calc(100vw - 28px);
+    }
+
+    .js-ready .home-nav {
+        right: 8px;
+        width: calc(100vw - 28px);
+    }
+}
+
+@media (hover: none), (pointer: coarse) {
+    body {
+        cursor: auto;
+    }
+
+    .cursor,
+    .sparkle {
+        display: none !important;
+    }
+}
