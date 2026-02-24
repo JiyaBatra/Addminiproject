@@ -2,20 +2,38 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Open Source Mini Projects</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <header>
-    <h1>🌸 Open Source Mini Projects</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="contribute.html">How to Contribute</a>
-      <a href="contact.html">Contact</a>
-      <a href="projects.html">Projects</a>
-    </nav>
+  <header class="home-header">
+    <div class="home-header-inner">
+      <a class="home-brand" href="index.html" aria-label="Open Source Mini Projects home page">
+        <span class="home-brand-icon" aria-hidden="true">🌸</span>
+        <span class="home-brand-copy">
+          <span class="home-brand-title">Open Source Mini Projects</span>
+          <span class="home-brand-tagline">Build. Share. Grow. Together.</span>
+        </span>
+      </a>
+
+      <button class="home-nav-toggle" type="button" aria-controls="home-nav" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav id="home-nav" class="home-nav" aria-label="Primary navigation">
+        <a class="active" href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contribute.html">How to Contribute</a>
+        <a href="contact.html">Contact</a>
+        <a href="projects.html">Projects</a>
+      </nav>
+    </div>
   </header>
 
   <section class="hero">
