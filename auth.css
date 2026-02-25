@@ -1,4 +1,4 @@
-/*  GLOBAL  */
+/* ================= GLOBAL ================= */
 *{
   box-sizing:border-box;
   margin:0;
@@ -6,51 +6,52 @@
   font-family:"Poppins",sans-serif;
 }
 
-/*  BACKGROUND  */
+/* ================= BACKGROUND ================= */
 body{
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
 
-  /* Deep Pink Gradient */
+  /* SAME pastel gradient as main website */
   background: linear-gradient(
     135deg,
-    #2b0f1f,
-    #4a1633,
-    #7a1f4d,
-    #b83280
+    #fdf6f0,
+    #f8e8ee,
+    #e4f0f6
   );
 
-  color:white;
+  color:#5c5470;
 }
 
-/*  AUTH CARD  */
+/* ================= AUTH CARD ================= */
 .auth-container{
   width:400px;
   padding:45px;
-  border-radius:22px;
+  border-radius:26px;
 
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(20px);
+  /* pastel glass effect */
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(15px);
 
-  border:1px solid rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.85);
 
   box-shadow:
-    0 25px 60px rgba(0,0,0,0.6);
+    0 16px 45px rgba(113,79,127,0.18);
 
   text-align:center;
 }
 
-/*  TITLE  */
+/* ================= TITLE ================= */
 h2{
-  color:#ffd1e8;
+  font-family:'Playfair Display', serif;
+  color:#6d4e86;
   margin-bottom:28px;
   font-weight:600;
   letter-spacing:0.5px;
 }
 
-/*  INPUT GROUP  */
+/* ================= INPUT GROUP ================= */
 .input-group{
   position:relative;
   margin-bottom:18px;
@@ -59,20 +60,29 @@ h2{
 input{
   width:100%;
   padding:14px;
-  border-radius:12px;
-  border:none;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.9);
   outline:none;
 
-  background:rgba(255,255,255,0.12);
-  color:white;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+
+  color:#6a4e77;
   font-size:15px;
+  transition:0.25s ease;
 }
 
 input::placeholder{
-  color:#ffc3dc;
+  color:#b08fbf;
 }
 
-/*  PASSWORD TOGGLE  */
+/* input focus pastel glow */
+input:focus{
+  border-color:#ff9eb5;
+  box-shadow:0 0 0 3px rgba(255,158,181,0.25);
+}
+
+/* ================= PASSWORD TOGGLE ================= */
 .toggle-password{
   position:absolute;
   right:14px;
@@ -80,44 +90,52 @@ input::placeholder{
   transform:translateY(-50%);
   cursor:pointer;
   font-size:16px;
+  color:#8a6aa3;
 }
 
-/*  BUTTON  */
+/* ================= BUTTON ================= */
 button{
   width:100%;
   padding:14px;
   border:none;
-  border-radius:14px;
+  border-radius:999px;
   margin-top:12px;
 
-  background:linear-gradient(135deg,#ff4fa3,#ff7ab6);
+  /* pastel gradient button (same family as navbar active) */
+  background:linear-gradient(135deg,#ff86ba,#b17ff6);
   color:white;
   font-size:16px;
   font-weight:600;
   cursor:pointer;
-  transition:0.3s;
+
+  transition: all 0.3s ease;
 }
 
 button:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 25px rgba(255,79,163,0.45);
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(191,115,185,0.35);
 }
 
-/*  LINKS  */
+/* ================= LINKS ================= */
 p{
   margin-top:20px;
-  color:#ffd1e8;
+  color:#7a5c8e;
 }
 
 a{
-  color:#ff9ccc;
+  color:#ff86ba;
   font-weight:600;
   text-decoration:none;
+  transition:0.25s;
 }
 
-/*  ERROR  */
+a:hover{
+  color:#b23e86;
+}
+
+/* ================= ERROR ================= */
 .error{
-  color:#ff9bb5;
+  color:#ff6fa3;
   font-size:14px;
   margin-top:8px;
 }
