@@ -13,7 +13,7 @@
 
 3. **Clone Your Fork**  
    ```bash
-   git clone https://github.com/your-username/ArtPortfolio_jtc.git
+   git clone https://github.com/your-username/Addminiproject.git
 `
 
 4. **Create a Branch for Your Issue**
@@ -69,4 +69,3 @@ When reporting a bug or suggesting a mini project, include:
 * Screenshots (if applicable)
 
 ---
-

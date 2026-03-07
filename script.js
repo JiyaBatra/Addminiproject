@@ -6,16 +6,19 @@ const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine
 
 if (cursor && supportsFinePointer) {
     document.addEventListener("mousemove", (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+
         // Move butterfly
-        cursor.style.left = e.pageX + "px";
-        cursor.style.top = e.pageY + "px";
+        cursor.style.left = x + "px";
+        cursor.style.top = y + "px";
 
         // Create sparkle
         const sparkle = document.createElement("div");
         sparkle.classList.add("sparkle");
 
-        sparkle.style.left = e.pageX + "px";
-        sparkle.style.top = e.pageY + "px";
+        sparkle.style.left = x - 7 + "px";
+        sparkle.style.top = y - 7 + "px";
 
         document.body.appendChild(sparkle);
 

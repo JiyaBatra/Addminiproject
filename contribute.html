@@ -1,60 +1,202 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Contribute</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contribute.css">
 </head>
+
 <body>
- <a href="index.html" class="back-home">⬅Back Home</a>
-<header>
-    <h1>How to Contribute 🤝</h1>
-</header>
+    <header class="home-header">
+        <div class="home-header-inner">
+            <a class="home-brand" href="index.html">
+                <span class="home-brand-icon">🌸</span>
+                <span class="home-brand-copy">
+                    <span class="home-brand-title">Open Source Mini Projects</span>
+                    <span class="home-brand-tagline">Build. Share. Grow. Together.</span>
+                </span>
+            </a>
 
-<section class="contribute-section">
+            <button class="home-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-    <div class="contribute-card">
+            <nav id="home-nav" class="home-nav" aria-label="Main Navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a class="active" href="contribute.html">How to Contribute</a>
+                <a href="mini-project-guidelines/index.html">Guidelines</a>
+                <a href="contact.html">Contact</a>
+                <a href="projects.html">Projects</a>
+            </nav>
+        </div>
+    </header>
 
-        <h2>Step 1: Fork the Repository</h2>
-        <p>Click the <strong>Fork</strong> button on GitHub.</p>
+    <main class="contribute-page">
+        <section class="contribute-hero card-shell">
+            <h1>How to Contribute</h1>
+            <p>
+                You can contribute in two ways: add a mini project, or improve the main website with feature and
+                enhancement work.
+                Mini project submissions follow additional submission restrictions.
+            </p>
+        </section>
 
-        <h2>Step 2: Clone Your Fork</h2>
-        <pre><code>
-git clone https://github.com/your-username/repository-name.git
-cd repository-name
-        </code></pre>
+        <section class="contribute-grid">
+            <article class="panel card-shell">
+                <h2>Mini Project Rules</h2>
+                <p>
+                    Before starting a mini project, review the official rules. Mini project issues and PRs are validated
+                    for ownership, active submission limit, and 7-day restriction.
+                </p>
+                <a href="mini-project-guidelines/index.html" class="guideline-link">Open Mini Project Guidelines</a>
+            </article>
 
-        <h2>Step 3: Create a New Branch</h2>
-        <pre><code>
-git checkout -b your-project-name
-        </code></pre>
+            <article class="panel card-shell">
+                <h2>Choose Contribution Type</h2>
+                <p>
+                    Mini project contributions require rules confirmation. Feature and enhancement issues for the main
+                    website
+                    can be created directly.
+                </p>
+                <div class="submission-actions">
+                    <button type="button" class="open-submit-modal" id="openSubmitModal">Create Mini Project
+                        Issue</button>
+                    <a class="feature-issue-link" target="_blank" rel="noopener noreferrer"
+                        href="https://github.com/JiyaBatra/Addminiproject/issues/new?title=Feature%20or%20Enhancement%3A%20&body=%3C!--%20contribution-type%3A%20feature-enhancement%20--%3E%0A%0AFeature%20summary%3A%0A%0AExpected%20impact%3A%0A&labels=enhancement">Create
+                        Feature/Enhancement Issue</a>
+                </div>
+            </article>
+        </section>
 
-        <h2>Step 4: Add Your Project</h2>
-        <p>Create a new folder inside <strong>projects</strong> and add your files.</p>
+        <section class="steps-panel card-shell">
+            <h2>Contribution Steps</h2>
+            <ol class="steps-list">
+                <li>
+                    <h3 class="step-title">Fork the Repository</h3>
+                    <p class="step-text">Click the <strong>Fork</strong> button on GitHub.</p>
+                </li>
+                <li>
+                    <h3 class="step-title">Clone Your Fork</h3>
+                    <pre class="step-code"><code>git clone https://github.com/your-username/Addminiproject.git
+cd Addminiproject</code></pre>
+                </li>
+                <li>
+                    <h3 class="step-title">Create a New Branch</h3>
+                    <pre class="step-code"><code>git checkout -b your-branch-name</code></pre>
+                </li>
+                <li>
+                    <h3 class="step-title">Make Your Changes</h3>
+                    <p class="step-text">
+                        Add your mini project inside <code>projectforcontributor</code> or work on approved website
+                        improvements.
+                    </p>
+                </li>
+                <li>
+                    <h3 class="step-title">Stage and Commit</h3>
+                    <pre class="step-code"><code>git add .
+git commit -m "Add: brief description of contribution"</code></pre>
+                </li>
+                <li>
+                    <h3 class="step-title">Push to GitHub</h3>
+                    <pre class="step-code"><code>git push origin your-branch-name</code></pre>
+                </li>
+                <li>
+                    <h3 class="step-title">Create Pull Request</h3>
+                    <p class="step-text">
+                        Open your fork on GitHub and click <strong>Compare &amp; Pull Request</strong>.
+                    </p>
+                </li>
+            </ol>
+        </section>
+    </main>
 
-        <h2>Step 5: Stage and Commit</h2>
-        <pre><code>
-git add .
-git commit -m "Added my mini project"
-        </code></pre>
-
-        <h2>Step 6: Push to GitHub</h2>
-        <pre><code>
-git push origin your-project-name
-        </code></pre>
-
-        <h2>Step 7: Create Pull Request</h2>
-        <p>Go to GitHub → Click <strong>Compare & Pull Request</strong>.</p>
-
+    <div class="rules-modal" id="rulesModal" hidden>
+        <div class="rules-modal-backdrop" id="closeRulesBackdrop"></div>
+        <div class="rules-modal-card" role="dialog" aria-modal="true" aria-labelledby="rulesModalTitle">
+            <h2 id="rulesModalTitle">Mini Project Rules Confirmation</h2>
+            <p>Please confirm the required rules before opening a mini project issue.</p>
+            <ul class="rules-list">
+                <li>Only one active project submission is allowed at a time.</li>
+                <li>A minimum 7-day gap is required after your previous submission.</li>
+                <li>You can work only on issues raised by yourself.</li>
+            </ul>
+            <label class="rules-confirm">
+                <input type="checkbox" id="agreeRules">
+                <span>I have read and understood the rules.</span>
+            </label>
+            <div class="modal-actions">
+                <button type="button" class="modal-btn secondary" id="closeRulesModal">Cancel</button>
+                <button type="button" class="modal-btn primary" id="continueSubmit" disabled>Continue to Mini Project
+                    Issue</button>
+            </div>
+            <p class="modal-note">
+                Backend checks enforce one active mini project, issue ownership, and 7-day restriction.
+            </p>
+        </div>
     </div>
-<div class="cursor"><img src="Assest/butterfly.mp4" alt="Butterfly Cursor"></div>
-<div class="sparkle-container"></div>
 
-<script src="script.js"></script>
-</section>
+    <div class="cursor">
+        <video src="Assest/butterfly.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+    </div>
+    <div class="sparkle-container"></div>
 
+    <script src="script.js"></script>
+    <script>
+        const openSubmitModalBtn = document.getElementById("openSubmitModal");
+        const rulesModal = document.getElementById("rulesModal");
+        const closeRulesModalBtn = document.getElementById("closeRulesModal");
+        const closeRulesBackdrop = document.getElementById("closeRulesBackdrop");
+        const agreeRulesInput = document.getElementById("agreeRules");
+        const continueSubmitBtn = document.getElementById("continueSubmit");
+        const issueCreateUrl =
+            "https://github.com/JiyaBatra/Addminiproject/issues/new?title=Mini%20Project%3A%20&body=%3C!--%20contribution-type%3A%20mini-project%20--%3E%0A%0AProject%20name%3A%0A%0AProject%20description%3A%0A%0ATech%20stack%3A%0A&labels=mini-project";
+
+        const openRulesModal = () => {
+            rulesModal.hidden = false;
+            continueSubmitBtn.disabled = !agreeRulesInput.checked;
+        };
+
+        const closeRulesModal = () => {
+            rulesModal.hidden = true;
+        };
+
+        if (
+            openSubmitModalBtn &&
+            rulesModal &&
+            closeRulesModalBtn &&
+            closeRulesBackdrop &&
+            agreeRulesInput &&
+            continueSubmitBtn
+        ) {
+            openSubmitModalBtn.addEventListener("click", openRulesModal);
+            closeRulesModalBtn.addEventListener("click", closeRulesModal);
+            closeRulesBackdrop.addEventListener("click", closeRulesModal);
+
+            agreeRulesInput.addEventListener("change", () => {
+                continueSubmitBtn.disabled = !agreeRulesInput.checked;
+            });
+
+            continueSubmitBtn.addEventListener("click", () => {
+                if (continueSubmitBtn.disabled) {
+                    return;
+                }
+                window.open(issueCreateUrl, "_blank", "noopener,noreferrer");
+                closeRulesModal();
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && !rulesModal.hidden) {
+                    closeRulesModal();
+                }
+            });
+        }
+    </script>
 </body>
+
 </html>

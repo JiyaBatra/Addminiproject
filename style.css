@@ -28,12 +28,23 @@ body {
     width: 45px;
     height: 45px;
     position: fixed;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 9999;
-    background: url("../AddMiniProject/Assest/butterflygif.mp4") no-repeat center;
-    background-size: contain;
+    display: grid;
+    place-items: center;
     mix-blend-mode: screen;/* removes white background effect */
-    transition: transform 0.05s linear;
+}
+
+.cursor video,
+.cursor img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
 }
 
 /* Sparkles */
@@ -447,7 +458,7 @@ section p.card {
 }
 
 .home-header-inner {
-    max-width: 1100px;
+    max-width: 1240px;
     margin: 0 auto;
     display: flex;
     align-items: center;

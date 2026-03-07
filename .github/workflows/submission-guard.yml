@@ -1,0 +1,335 @@
+name: Submission Guard
+
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened]
+  issues:
+    types: [opened, edited, reopened, labeled]
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: write
+
+jobs:
+  validate-mini-project-pr:
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate mini project PR rules
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const pr = context.payload.pull_request;
+            const author = pr.user.login;
+            const body = pr.body || "";
+
+            const parseIssueNumber = (text) => {
+              const match =
+                text.match(/(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\s+#(\d+)/i) ||
+                text.match(/#(\d+)/);
+              return match ? Number(match[1]) : null;
+            };
+
+            const isMiniIssue = (issue) => {
+              const labels = (issue.labels || []).map((label) =>
+                String(typeof label === "string" ? label : label.name || "").toLowerCase()
+              );
+              const title = String(issue.title || "").toLowerCase();
+              const issueBody = String(issue.body || "").toLowerCase();
+              const hasMiniLabel = labels.some((name) => name.includes("mini") && name.includes("project"));
+              const hasMiniMarker = issueBody.includes("contribution-type: mini-project");
+              return hasMiniLabel || hasMiniMarker || title.includes("mini project");
+            };
+
+            const prTouchesMiniProject = async (pullNumber) => {
+              let page = 1;
+              while (true) {
+                const { data: files } = await github.rest.pulls.listFiles({
+                  owner,
+                  repo,
+                  pull_number: pullNumber,
+                  per_page: 100,
+                  page
+                });
+
+                if (!files.length) {
+                  return false;
+                }
+
+                if (files.some((file) => file.filename.startsWith("projectforcontributor/"))) {
+                  return true;
+                }
+
+                if (files.length < 100) {
+                  return false;
+                }
+
+                page += 1;
+              }
+            };
+
+            const linkedIssueNumber = parseIssueNumber(body);
+            let linkedIssue = null;
+            let linkedIssueIsMini = false;
+
+            if (linkedIssueNumber) {
+              try {
+                const { data } = await github.rest.issues.get({
+                  owner,
+                  repo,
+                  issue_number: linkedIssueNumber
+                });
+                linkedIssue = data;
+                linkedIssueIsMini = !data.pull_request && isMiniIssue(data);
+              } catch (error) {
+                core.warning(`Could not load linked issue #${linkedIssueNumber}: ${error.message}`);
+              }
+            }
+
+            const touchesMiniProjectFolder = await prTouchesMiniProject(pr.number);
+            const isMiniContribution = touchesMiniProjectFolder || linkedIssueIsMini;
+
+            if (!isMiniContribution) {
+              core.info("Not a mini-project contribution PR. Skipping mini-project restriction checks.");
+              return;
+            }
+
+            if (!linkedIssueNumber) {
+              core.setFailed(
+                "Mini-project PR must link a mini-project issue in the description (example: Closes #123)."
+              );
+              return;
+            }
+
+            if (!linkedIssue) {
+              core.setFailed(`Could not read linked issue #${linkedIssueNumber}.`);
+              return;
+            }
+
+            if (linkedIssue.pull_request) {
+              core.setFailed(
+                `#${linkedIssueNumber} is a pull request, not an issue. Link a mini-project issue.`
+              );
+              return;
+            }
+
+            if (!isMiniIssue(linkedIssue)) {
+              core.setFailed(
+                "Linked issue is not marked as a mini-project issue. Use the mini-project issue flow from the contribution page."
+              );
+              return;
+            }
+
+            if (linkedIssue.user.login.toLowerCase() !== author.toLowerCase()) {
+              core.setFailed(
+                `Issue ownership rule failed: linked issue #${linkedIssueNumber} was raised by @${linkedIssue.user.login}, but PR author is @${author}.`
+              );
+              return;
+            }
+
+            const { data: openPrs } = await github.rest.pulls.list({
+              owner,
+              repo,
+              state: "open",
+              per_page: 100
+            });
+
+            const otherOpenByAuthor = openPrs.filter(
+              (item) =>
+                item.number !== pr.number &&
+                item.user.login.toLowerCase() === author.toLowerCase()
+            );
+
+            for (const candidate of otherOpenByAuthor) {
+              if (await prTouchesMiniProject(candidate.number)) {
+                core.setFailed(
+                  `One active mini-project rule failed: @${author} already has open mini-project PR #${candidate.number}.`
+                );
+                return;
+              }
+            }
+
+            const q = `repo:${owner}/${repo} is:pr is:merged author:${author}`;
+            const { data: search } = await github.rest.search.issuesAndPullRequests({
+              q,
+              sort: "updated",
+              order: "desc",
+              per_page: 30
+            });
+
+            let lastMiniMergedAt = null;
+
+            for (const item of search.items) {
+              if (item.number === pr.number) {
+                continue;
+              }
+
+              const { data: mergedPr } = await github.rest.pulls.get({
+                owner,
+                repo,
+                pull_number: item.number
+              });
+
+              if (!mergedPr.merged_at) {
+                continue;
+              }
+
+              const isMiniPr = await prTouchesMiniProject(item.number);
+              if (!isMiniPr) {
+                continue;
+              }
+
+              if (!lastMiniMergedAt || Date.parse(mergedPr.merged_at) > Date.parse(lastMiniMergedAt)) {
+                lastMiniMergedAt = mergedPr.merged_at;
+              }
+            }
+
+            if (!lastMiniMergedAt) {
+              core.info("No previous merged mini-project PR found. 7-day check skipped.");
+              return;
+            }
+
+            const nowMs = Date.now();
+            const lastMergedMs = Date.parse(lastMiniMergedAt);
+            const daysSince = (nowMs - lastMergedMs) / (1000 * 60 * 60 * 24);
+
+            if (daysSince < 7) {
+              const remaining = Math.ceil(7 - daysSince);
+              core.setFailed(
+                `7-day rule failed: last mini-project PR was merged ${daysSince.toFixed(2)} day(s) ago. Wait ${remaining} more day(s).`
+              );
+              return;
+            }
+
+            core.info("Mini-project PR checks passed.");
+
+  validate-mini-project-issue-gap:
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate mini project issue timing
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue = context.payload.issue;
+
+            const isMiniIssue = (targetIssue) => {
+              const labels = (targetIssue.labels || []).map((label) =>
+                String(typeof label === "string" ? label : label.name || "").toLowerCase()
+              );
+              const title = String(targetIssue.title || "").toLowerCase();
+              const issueBody = String(targetIssue.body || "").toLowerCase();
+              const hasMiniLabel = labels.some((name) => name.includes("mini") && name.includes("project"));
+              const hasMiniMarker = issueBody.includes("contribution-type: mini-project");
+              return hasMiniLabel || hasMiniMarker || title.includes("mini project");
+            };
+
+            const prTouchesMiniProject = async (pullNumber) => {
+              let page = 1;
+              while (true) {
+                const { data: files } = await github.rest.pulls.listFiles({
+                  owner,
+                  repo,
+                  pull_number: pullNumber,
+                  per_page: 100,
+                  page
+                });
+
+                if (!files.length) {
+                  return false;
+                }
+
+                if (files.some((file) => file.filename.startsWith("projectforcontributor/"))) {
+                  return true;
+                }
+
+                if (files.length < 100) {
+                  return false;
+                }
+
+                page += 1;
+              }
+            };
+
+            if (issue.pull_request || !isMiniIssue(issue)) {
+              core.info("Not a mini-project issue. Skipping 7-day issue check.");
+              return;
+            }
+
+            if (issue.state !== "open") {
+              core.info("Issue is not open. Skipping.");
+              return;
+            }
+
+            const author = issue.user.login;
+            const q = `repo:${owner}/${repo} is:pr is:merged author:${author}`;
+            const { data: search } = await github.rest.search.issuesAndPullRequests({
+              q,
+              sort: "updated",
+              order: "desc",
+              per_page: 30
+            });
+
+            let lastMiniMergedAt = null;
+
+            for (const item of search.items) {
+              const { data: mergedPr } = await github.rest.pulls.get({
+                owner,
+                repo,
+                pull_number: item.number
+              });
+
+              if (!mergedPr.merged_at) {
+                continue;
+              }
+
+              const isMiniPr = await prTouchesMiniProject(item.number);
+              if (!isMiniPr) {
+                continue;
+              }
+
+              if (!lastMiniMergedAt || Date.parse(mergedPr.merged_at) > Date.parse(lastMiniMergedAt)) {
+                lastMiniMergedAt = mergedPr.merged_at;
+              }
+            }
+
+            if (!lastMiniMergedAt) {
+              core.info("No previous merged mini-project PR found. Issue check passed.");
+              return;
+            }
+
+            const nowMs = Date.now();
+            const lastMergedMs = Date.parse(lastMiniMergedAt);
+            const daysSince = (nowMs - lastMergedMs) / (1000 * 60 * 60 * 24);
+
+            if (daysSince >= 7) {
+              core.info("7-day issue check passed.");
+              return;
+            }
+
+            const remaining = Math.ceil(7 - daysSince);
+            const message =
+              `This mini-project issue was auto-closed because the 7-day rule is not satisfied.\n\n` +
+              `Your last merged mini-project contribution was ${daysSince.toFixed(2)} day(s) ago.\n` +
+              `Please wait ${remaining} more day(s) and create a new mini-project issue after that.`;
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: issue.number,
+              body: message
+            });
+
+            await github.rest.issues.update({
+              owner,
+              repo,
+              issue_number: issue.number,
+              state: "closed"
+            });
+
+            core.setFailed("Issue failed 7-day mini-project restriction and was closed.");
