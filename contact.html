@@ -336,20 +336,20 @@ header h1{
 
 <h2>Send a Message</h2>
 
-<form>
+<form method="post" id="contactForm">
 
 <div class="input-group">
-<input type="text" required>
+<input name="name" type="text" required>
 <label>Your Name</label>
 </div>
 
 <div class="input-group">
-<input type="email" required>
+<input name="email" type="email" required>
 <label>Your Email</label>
 </div>
 
 <div class="input-group">
-<input type="text" required>
+<input name="subject" type="text" required>
 <label>Subject</label>
 </div>
 
@@ -372,5 +372,6 @@ header h1{
 © 2026 Jiya Batra — All Rights Reserved.
 </footer>
 
+<script src="form-config.js"></script>
 </body>
 </html>
