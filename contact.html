@@ -1,293 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact</title>
+<title>Contact | Add Mini Project</title>
 
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="contact.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-
-/* ===== RESET ===== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-html,body{
-    overflow-x:clip; /* ✅ removes extra page */
-}
-
-body{
-    color:#fff;
-    position:relative;
-
-    background:
-        radial-gradient(circle at 20% 20%, #ff9ad5, transparent 40%),
-        radial-gradient(circle at 80% 30%, #8fa8ff, transparent 40%),
-        radial-gradient(circle at 50% 80%, #c3a6ff, transparent 40%),
-        #0f1020;
-}
-
-/* ===== PAGE CENTER ===== */
-.page-center{
-    min-height:100vh;
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:40px 0;
-}
-
-/* ===== BACKGROUND BLOBS (FIXED) ===== */
-body::before,
-body::after{
-    content:"";
-    position:fixed; /* ⭐ prevents overflow */
-    width:400px;
-    height:400px;
-    border-radius:50%;
-    filter:blur(120px);
-    opacity:.5;
-    z-index:-1;
-    pointer-events:none;
-}
-
-body::before{
-    background:#ff69b4;
-    top:-100px;
-    left:-100px;
-}
-
-body::after{
-    background:#7b6cf6;
-    bottom:-120px;
-    right:-120px;
-}
-
-/* ===== HEADER ===== */
-header h1{
-    font-size:2.6rem;
-    margin-bottom:40px;
-    text-align:center;
-}
-
-/* ===== LAYOUT ===== */
-.contact-wrapper{
-    width:90%;
-    max-width:1200px;
-    display:flex;
-    gap:40px;
-    align-items:stretch;
-    justify-content:center;
-}
-
-@media (max-width:900px){
-    .contact-wrapper{
-        flex-direction:column;
-    }
-}
-
-/* ===== CARDS ===== */
-.contact-card,
-.message-card{
-    flex:1;
-    padding:50px 45px;
-
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(25px);
-    border-radius:30px;
-    border:1px solid rgba(255,255,255,0.15);
-    box-shadow:0 25px 60px rgba(0,0,0,0.35);
-}
-
-/* CONTACT CARD */
-.contact-card{
-    transition:.4s;
-}
-
-.contact-card:hover{
-    transform:translateY(-8px) scale(1.02);
-}
-
-.contact-item{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    padding:18px 20px;
-    margin:18px 0;
-    border-radius:18px;
-    transition:.35s;
-}
-
-.contact-item:hover{
-    background:rgba(255,255,255,0.08);
-    transform:translateX(10px);
-}
-
-.contact-item i{
-    font-size:1.5rem;
-    width:45px;
-    height:45px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:12px;
-    background:linear-gradient(135deg,#7b6cf6,#ff69b4);
-    box-shadow:0 0 20px rgba(255,105,180,.4);
-}
-
-.contact-item span{
-    opacity:.8;
-}
-
-.contact-item a{
-    color:#fff;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.contact-item a:hover{
-    color:#ffd1ec;
-}
-
-.footer-note{
-    margin-top:25px;
-    text-align:center;
-    opacity:.7;
-}
-
-/* MESSAGE CARD */
-.message-card{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.message-card h2{
-    margin-bottom:30px;
-}
-
-/* INPUTS */
-.input-group{
-    position:relative;
-    margin:22px 0;
-}
-
-.input-group input,
-.input-group textarea{
-    width:100%;
-    padding:16px;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,0.2);
-    background:rgba(255,255,255,0.05);
-    color:white;
-    outline:none;
-}
-
-.input-group textarea{
-    resize:none;
-}
-
-.input-group label{
-    position:absolute;
-    left:16px;
-    top:50%;
-    transform:translateY(-50%);
-    color:rgba(255,255,255,0.6);
-    pointer-events:none;
-    transition:.3s;
-}
-
-.input-group textarea + label{
-    top:22px;
-}
-
-.input-group input:focus,
-.input-group textarea:focus{
-    border-color:#ff69b4;
-    box-shadow:0 0 12px rgba(255,105,180,.4);
-}
-
-.input-group input:focus + label,
-.input-group input:valid + label,
-.input-group textarea:focus + label,
-.input-group textarea:valid + label{
-    top:-10px;
-    font-size:.8rem;
-    background:#0f1020;
-    padding:0 6px;
-    color:#ffb3de;
-}
-
-/* BUTTON */
-.send-btn{
-    width:100%;
-    padding:16px;
-    margin-top:15px;
-    border:none;
-    border-radius:14px;
-    font-size:1.1rem;
-    font-weight:600;
-    color:white;
-    cursor:pointer;
-    background:linear-gradient(135deg,#ff4f8b,#ff7ab6);
-    transition:.35s;
-}
-
-.send-btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 25px rgba(255,105,180,.5);
-}
-
-/* ===== FOOTER ===== */
-.site-footer{
-    width:100%;
-    text-align:center;
-    padding:20px 10px;
-    font-size:.9rem;
-    opacity:.7;
-    border-top:1px solid rgba(255,255,255,0.1);
-    backdrop-filter:blur(10px);
-}
-.back-home {
-    position: fixed;   /* stays visible while scrolling */
-    left: 30px;        /* moves to left side */
-    top: 10%;          /* vertically centered */
-    transform: translateY(-50%);
-
-    padding: 12px 18px;
-    background: #ffb6c1;
-    color: white;
-    text-decoration: none;
-    border-radius: 25px;
-    font-weight: 600;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    transition: 0.3s ease;
-}
-
-.back-home:hover {
-    background: #ff8fab;
-    transform: translateY(-50%) scale(1.05);
-}
-
-
-</style>
 </head>
 
-<body>
-    <a href="index.html" class="back-home">⬅Back Home</a>
+<body class="contact-page">
+<header class="home-header">
+    <div class="home-header-inner">
+        <a class="home-brand" href="index.html">
+            <span class="home-brand-icon">&#127800;</span>
+            <span class="home-brand-copy">
+                <span class="home-brand-title">Open Source Mini Projects</span>
+                <span class="home-brand-tagline">Build. Share. Grow. Together.</span>
+            </span>
+        </a>
 
-<main class="page-center">
+        <button class="home-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation menu" aria-controls="home-nav">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-<header>
-<h1>Get in Touch ✨</h1>
+        <nav id="home-nav" class="home-nav" aria-label="Main Navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contribute.html">How to Contribute</a>
+            <a href="mini-project-guidelines/index.html">Guidelines</a>
+            <a class="active" href="contact.html">Contact</a>
+            <a href="projects.html">Projects</a>
+            <div class="nav-profile">
+                <span id="navUsername" class="nav-user"></span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </div>
 </header>
 
 <section class="contact-wrapper">
@@ -369,9 +122,19 @@ header h1{
 </main>
 
 <footer class="site-footer">
-© 2026 Jiya Batra — All Rights Reserved.
+    <div class="site-footer-inner">
+        <p class="site-footer-title">Open Source Mini Projects</p>
+            <p class="site-footer-note">Where ideas become mini projects and contributions become growth.</p>
+            <div class="site-footer-highlights" aria-label="Community highlights">
+                <span>Open Source</span>
+                <span>Beginner Friendly</span>
+                <span>Community Driven</span>
+            </div>
+            <p class="site-footer-meta">&#169; <span class="footer-year">2026</span> Open Source Mini Projects &#128150;</p>
+    </div>
 </footer>
 
 <script src="form-config.js"></script>
 </body>
 </html>
+

@@ -1,31 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>About</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Add Mini Project</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <h1>About This Project</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="contribute.html">How to Contribute</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
+    <header class="home-header">
+        <div class="home-header-inner">
+            <a class="home-brand" href="index.html">
+                <span class="home-brand-icon">&#127800;</span>
+                <span class="home-brand-copy">
+                    <span class="home-brand-title">Open Source Mini Projects</span>
+                    <span class="home-brand-tagline">Build. Share. Grow. Together.</span>
+                </span>
+            </a>
 
-<section>
-   <p class="card">Welcome to our open-source hub! 🎉
-This project is a community-driven platform where anyone can contribute by sharing their mini projects. Whether you’re a beginner experimenting with code, a designer exploring creative ideas, or a developer building cool tools, this is the place to showcase your work.
-</p> 
-<p class="card">Our goal is to create a collaborative space where learning, sharing, and growing together is easy and fun. Every contribution—big or small—helps others learn, inspires creativity, and strengthens our community.</p>
+            <button class="home-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation menu" aria-controls="home-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-<p class="card">Join us, add your mini project, and be part of a growing network of makers and innovators!</p>
-</section>
-<div class="cursor"><img src="Assest/butterfly.mp4" alt="Butterfly Cursor"></div>
-<div class="sparkle-container"></div>
+            <nav id="home-nav" class="home-nav" aria-label="Main Navigation">
+                <a href="index.html">Home</a>
+                <a class="active" href="about.html">About</a>
+                <a href="contribute.html">How to Contribute</a>
+                <a href="mini-project-guidelines/index.html">Guidelines</a>
+                <a href="contact.html">Contact</a>
+                <a href="projects.html">Projects</a>
+                <div class="nav-profile">
+                    <span id="navUsername" class="nav-user"></span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-<script src="script.js"></script>
+    <main class="about-page">
+        <section class="about-hero">
+            <p class="about-eyebrow" data-motion="fade" data-motion-on="load">Community Driven</p>
+            <h1 data-motion="stagger" data-stagger="letters" data-motion-on="load">About This Project</h1>
+            <p class="about-intro" data-motion="slide" data-motion-on="load" data-motion-delay="140ms">
+                Welcome to our open-source hub. This is a community-powered space where beginners, designers, and developers can publish mini projects and learn together.
+            </p>
+        </section>
+
+        <section class="about-copy">
+            <p class="card" data-motion="slide" data-motion-on="scroll" data-motion-delay="90ms">
+                Our goal is to make collaboration simple and fun. Every contribution, big or small, helps others learn, inspires new ideas, and strengthens the community.
+            </p>
+            <p class="card" data-motion="fade" data-motion-on="scroll" data-motion-delay="120ms">
+                Join us, add your mini project, and be part of a growing network of makers and innovators.
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <p class="site-footer-title">Open Source Mini Projects</p>
+            <p class="site-footer-note">Where ideas become mini projects and contributions become growth.</p>
+            <div class="site-footer-highlights" aria-label="Community highlights">
+                <span>Open Source</span>
+                <span>Beginner Friendly</span>
+                <span>Community Driven</span>
+            </div>
+            <p class="site-footer-meta">&#169; <span class="footer-year">2026</span> Open Source Mini Projects &#128150;</p>
+        </div>
+    </footer>
+
+    <div class="cursor">
+        <video src="Assest/butterfly.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+    </div>
+    <div class="sparkle-container"></div>
+
+    <script src="auth.js"></script>
+    <script>
+        checkAuth();
+        showLoggedInUser();
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>
+

@@ -1,25 +1,32 @@
-/*
-   PASSWORD TOGGLE */
+function getMainPagePath(fileName) {
+  const normalizedPath = window.location.pathname.replace(/\\/g, "/");
+  const isGuidelinesPage = normalizedPath.includes("/mini-project-guidelines/");
+  return isGuidelinesPage ? `../${fileName}` : fileName;
+}
+
+/* Password toggle */
 function togglePassword(id, icon) {
   const input = document.getElementById(id);
 
+  if (!input || !icon) {
+    return;
+  }
+
   if (input.type === "password") {
     input.type = "text";
-    icon.textContent = "🙈";
+    icon.textContent = "\u{1F648}";
   } else {
     input.type = "password";
-    icon.textContent = "👁";
+    icon.textContent = "\u{1F441}";
   }
 }
 
-
-/*
-   SIGN UP */
+/* Sign up */
 const signupForm = document.getElementById("signupForm");
 
 if (signupForm) {
-  signupForm.addEventListener("submit", function(e){
-    e.preventDefault();
+  signupForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
     const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
@@ -29,33 +36,28 @@ if (signupForm) {
 
     error.textContent = "";
 
-    if(password !== confirmPassword){
+    if (password !== confirmPassword) {
       error.textContent = "Passwords do not match!";
       return;
     }
 
     const user = { username, email, password };
-
-    // store registered user
     localStorage.setItem("user", JSON.stringify(user));
 
-    window.location.href = "signin.html";
+    window.location.href = getMainPagePath("signin.html");
   });
 }
 
-
-/*
-   SIGN IN */
+/* Sign in */
 const signinForm = document.getElementById("signinForm");
 
 if (signinForm) {
-  signinForm.addEventListener("submit", function(e){
-    e.preventDefault();
+  signinForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
     const error = document.getElementById("loginError");
-
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
     if (
@@ -63,47 +65,35 @@ if (signinForm) {
       storedUser.email === email &&
       storedUser.password === password
     ) {
-
-      // create session
-      localStorage.setItem("loggedIn","true");
-
-      //  store logged-in username for navbar
+      localStorage.setItem("loggedIn", "true");
       localStorage.setItem("loggedInUser", storedUser.username);
-
-      window.location.href = "index.html";
-
+      window.location.href = getMainPagePath("index.html");
     } else {
       error.textContent = "Invalid email or password";
     }
   });
 }
 
-
-/*
-   SESSION CHECK */
-function checkAuth(){
-  if(!localStorage.getItem("loggedIn")){
-    window.location.href = "signin.html";
+/* Session check */
+function checkAuth() {
+  if (!localStorage.getItem("loggedIn")) {
+    window.location.href = getMainPagePath("signin.html");
   }
 }
 
-
-/*
-   SHOW USER IN NAVBAR */
-function showLoggedInUser(){
+/* Show username in navbar */
+function showLoggedInUser() {
   const username = localStorage.getItem("loggedInUser");
   const userElement = document.getElementById("navUsername");
 
-  if(userElement && username){
-    userElement.textContent =  username;
+  if (userElement && username) {
+    userElement.textContent = username;
   }
 }
 
-
-/*
-   LOGOUT */
-function logout(){
+/* Logout */
+function logout() {
   localStorage.removeItem("loggedIn");
   localStorage.removeItem("loggedInUser");
-  window.location.href = "signin.html";
+  window.location.href = getMainPagePath("signin.html");
 }

@@ -11,14 +11,14 @@
     <header class="home-header">
         <div class="home-header-inner">
             <a class="home-brand" href="../index.html">
-                <span class="home-brand-icon">🌸</span>
+                <span class="home-brand-icon">&#127800;</span>
                 <span class="home-brand-copy">
                     <span class="home-brand-title">Open Source Mini Projects</span>
                     <span class="home-brand-tagline">Build. Share. Grow. Together.</span>
                 </span>
             </a>
 
-            <button class="home-nav-toggle" type="button" aria-expanded="false">
+            <button class="home-nav-toggle" type="button" aria-expanded="false" aria-controls="home-nav" aria-label="Toggle navigation menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -31,6 +31,10 @@
                 <a class="active" href="./index.html">Guidelines</a>
                 <a href="../contact.html">Contact</a>
                 <a href="../projects.html">Projects</a>
+                <div class="nav-profile">
+                    <span id="navUsername" class="nav-user"></span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
             </nav>
         </div>
     </header>
@@ -141,11 +145,31 @@
         </section>
     </main>
 
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <p class="site-footer-title">Open Source Mini Projects</p>
+            <p class="site-footer-note">Where ideas become mini projects and contributions become growth.</p>
+            <div class="site-footer-highlights" aria-label="Community highlights">
+                <span>Open Source</span>
+                <span>Beginner Friendly</span>
+                <span>Community Driven</span>
+            </div>
+            <p class="site-footer-meta">&#169; <span class="footer-year">2026</span> Open Source Mini Projects &#128150;</p>
+        </div>
+    </footer>
+
     <div class="cursor">
         <video src="../Assest/butterfly.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
     </div>
     <div class="sparkle-container"></div>
 
+    <script src="../auth.js"></script>
+    <script>
+        checkAuth();
+        showLoggedInUser();
+    </script>
     <script src="../script.js"></script>
 </body>
 </html>
+
+

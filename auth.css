@@ -40,6 +40,7 @@ body{
     0 16px 45px rgba(113,79,127,0.18);
 
   text-align:center;
+  animation: authCardIn 700ms cubic-bezier(0.22,1,0.36,1) both;
 }
 
 /* ================= TITLE ================= */
@@ -49,12 +50,38 @@ h2{
   margin-bottom:28px;
   font-weight:600;
   letter-spacing:0.5px;
+  animation: authTitleIn 760ms cubic-bezier(0.22,1,0.36,1) both;
+  transition: letter-spacing 220ms ease, transform 220ms ease;
+}
+
+h2:hover{
+  transform: translateY(-1px);
+  letter-spacing: 1px;
 }
 
 /* ================= INPUT GROUP ================= */
 .input-group{
   position:relative;
   margin-bottom:18px;
+  opacity:0;
+  transform:translateY(14px);
+  animation: authFadeUp 560ms cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+.input-group:nth-of-type(1){
+  animation-delay:140ms;
+}
+
+.input-group:nth-of-type(2){
+  animation-delay:220ms;
+}
+
+.input-group:nth-of-type(3){
+  animation-delay:300ms;
+}
+
+.input-group:nth-of-type(4){
+  animation-delay:380ms;
 }
 
 input{
@@ -109,6 +136,9 @@ button{
   cursor:pointer;
 
   transition: all 0.3s ease;
+  opacity:0;
+  transform:translateY(14px);
+  animation: authFadeUp 560ms cubic-bezier(0.22,1,0.36,1) 420ms forwards;
 }
 
 button:hover{
@@ -120,6 +150,9 @@ button:hover{
 p{
   margin-top:20px;
   color:#7a5c8e;
+  opacity:0;
+  transform:translateY(14px);
+  animation: authFadeUp 560ms cubic-bezier(0.22,1,0.36,1) 500ms forwards;
 }
 
 a{
@@ -138,4 +171,52 @@ a:hover{
   color:#ff6fa3;
   font-size:14px;
   margin-top:8px;
+}
+
+@keyframes authCardIn{
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(0.98);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+@keyframes authTitleIn{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+    letter-spacing:0.2em;
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+    letter-spacing:0.03em;
+  }
+}
+
+@keyframes authFadeUp{
+  from{
+    opacity:0;
+    transform:translateY(14px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .auth-container,
+  h2,
+  .input-group,
+  button,
+  p{
+    animation:none !important;
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
 }

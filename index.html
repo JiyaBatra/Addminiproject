@@ -13,20 +13,21 @@
   <header class="home-header">
     <div class="home-header-inner">
       <a class="home-brand" href="index.html">
-        <span class="home-brand-icon">🌸</span>
+        <span class="home-brand-icon">&#127800;</span>
         <span class="home-brand-copy">
           <span class="home-brand-title">Open Source Mini Projects</span>
           <span class="home-brand-tagline">Build. Share. Grow. Together.</span>
         </span>
       </a>
 
-      <button class="home-nav-toggle" type="button">
+      <button class="home-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation menu"
+        aria-controls="home-nav">
         <span></span>
         <span></span>
         <span></span>
       </button>
 
-      <nav id="home-nav" class="home-nav">
+      <nav id="home-nav" class="home-nav" aria-label="Main Navigation">
         <a class="active" href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="contribute.html">How to Contribute</a>
@@ -37,59 +38,61 @@
         <!-- USER + LOGOUT ADDED -->
         <div class="nav-profile">
           <span id="navUsername" class="nav-user"></span>
-          <button class="logout-btn" onclick="logout()">logout
-          </button>
+          <button class="logout-btn" onclick="logout()">Logout</button>
         </div>
       </nav>
     </div>
   </header>
 
   <section class="hero">
-    <h2>Build. Share. Grow.</h2>
-    <p>
-      Anyone can contribute by adding mini projects inside the projects folder 💖
+    <h2 data-motion="stagger" data-stagger="letters" data-motion-on="load">Build. Share. Grow. Together.</h2>
+    <p data-motion="slide" data-motion-on="load" data-motion-delay="220ms">
+      Anyone can contribute by adding mini projects inside the projects folder &#128150;
     </p>
   </section>
 
   <section class="projects">
-    <h2>Community Projects</h2>
-    <p>Explore projects inside the <strong>projects</strong> folder.</p>
+    <h2 data-motion="stagger" data-stagger="words" data-motion-on="scroll">Community Projects</h2>
+    <p data-motion="fade" data-motion-on="scroll" data-motion-delay="120ms">Explore projects inside the
+      <strong>projects</strong> folder.</p>
 
-    <h2>Mini Project Example 🩷</h2>
+    <h2 data-motion="stagger" data-stagger="words" data-motion-on="scroll">Mini Project Example &#129655;</h2>
 
     <section class="mini-projects">
       <div class="projects-container">
 
         <div class="project-card">
           <h3>Cute Calculator</h3>
-          <p>A pastel pink calculator mini-project example 💖</p>
+          <p>A pastel pink calculator mini-project example &#128150;</p>
           <a href="projectforcontributor/MiniCalculator/calculator.html" class="project-link">Open Project</a>
         </div>
 
         <div class="project-card">
           <h3>Future Letters</h3>
-          <p>Write a letter to your future self 💌</p>
-          <a href="https://letter-to-my-future-self.vercel.app/" class="project-link" target="_blank">Open Project</a>
-          <a href="https://github.com/RishiMaskare/letter-to-my-future-self" class="github-link" target="_blank">
+          <p>Write a letter to your future self &#128140;</p>
+          <a href="https://letter-to-my-future-self.vercel.app/" class="project-link" target="_blank"
+            rel="noopener noreferrer">Open Project</a>
+          <a href="https://github.com/RishiMaskare/letter-to-my-future-self" class="github-link" target="_blank"
+            rel="noopener noreferrer">
             View GitHub Repo
           </a>
         </div>
 
         <div class="project-card">
           <h3>Pastel To-Do App</h3>
-          <p>A cute task manager with local storage 🌸</p>
+          <p>A cute task manager with local storage &#127800;</p>
           <a href="projectforcontributor/TodoApp/todo.html" class="project-link">Open Project</a>
         </div>
 
         <div class="project-card">
           <h3>Password Generator</h3>
-          <p>Create strong random passwords instantly 🔐</p>
+          <p>Create strong random passwords instantly &#128274;</p>
           <a href="projectforcontributor/PasswordGenerator/password.html" class="project-link">Open Project</a>
         </div>
 
         <div class="project-card">
           <h3>Number Guessing Game</h3>
-          <p>Guess the hidden number between 1–100 🎯</p>
+          <p>Guess the hidden number between 1-100 &#127919;</p>
           <a href="projectforcontributor/NumberGuessGame/guess.html" class="project-link">Open Project</a>
         </div>
 
@@ -100,21 +103,27 @@
         </div>
 
         <div class="project-card">
-  <h3>Tic Tac Toe</h3>
-  <p>Classic 2-player game 🎮 Play with a friend!</p>
+          <h3>Tic Tac Toe</h3>
+          <p>Classic 2-player game &#127918; Play with a friend!</p>
 
-  <a href="projectforcontributor/TicTacToe/tictactoe.html"
-     class="project-link">
-     Open Project
-  </a>
-</div>
+          <a href="projectforcontributor/TicTacToe/tictactoe.html" class="project-link">
+            Open Project
+          </a>
+        </div>
 
       </div>
     </section>
   </section>
 
-  <footer>
-    <p>Made with 💕 by Open Source Community</p>
+  <footer class="site-footer">
+    <p class="site-footer-title">Open Source Mini Projects</p>
+    <p class="site-footer-note">Where ideas become mini projects and contributions become growth.</p>
+    <div class="site-footer-highlights" aria-label="Community highlights">
+      <span>Open Source</span>
+      <span>Beginner Friendly</span>
+      <span>Community Driven</span>
+    </div>
+    <p class="site-footer-meta">&#169; <span class="footer-year">2026</span> Open Source Mini Projects &#128150;</p>
   </footer>
 
   <div class="cursor">

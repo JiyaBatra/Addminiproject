@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,86 +9,125 @@
 </head>
 
 <body>
-    <!-- Back to Home Button -->
-    <a href="index.html" class="back-home">⬅Back Home</a>
+    <header class="home-header">
+        <div class="home-header-inner">
+            <a class="home-brand" href="index.html">
+                <span class="home-brand-icon">&#127800;</span>
+                <span class="home-brand-copy">
+                    <span class="home-brand-title">Open Source Mini Projects</span>
+                    <span class="home-brand-tagline">Build. Share. Grow. Together.</span>
+                </span>
+            </a>
 
+            <button class="home-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation menu" aria-controls="home-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-    <h1>Projects</h1>
-    <p>Add your own & Explore Other projects!!</p>
-
-    <section class="mini-projects">
-        <h2>Mini Project Example 🩷</h2>
-
-        <div class="projects-container">
-
-            <!-- Cute Calculator -->
-            <div class="project-card">
-                <h3>Cute Calculator</h3>
-                <p>A pastel pink calculator mini-project example 💖</p>
-                <a href="projectforcontributor/MiniCalculator/calculator.html" class="project-link">Open Project</a>
-            </div>
-
-            <!-- Future Letters -->
-            <div class="project-card">
-                <h3>Future Letters</h3>
-                <p>Write a letter to your future self 💌</p>
-
-                <a href="https://letter-to-my-future-self.vercel.app/" class="project-link" target="_blank">
-                    Open Project
-                </a>
-
-                <a href="https://github.com/RishiMaskare/letter-to-my-future-self" class="github-link" target="_blank">
-                    View GitHub Repo
-                </a>
-            </div>
-            <!-- ToDoList App -->
-            <div class="project-card">
-                <h3>Pastel To-Do App</h3>
-                <p>A cute task manager with local storage 🌸</p>
-
-                <a href="projectforcontributor/TodoApp/todo.html" class="project-link">
-                    Open Project
-                </a>
-            </div>
-            <div class="project-card">
-                <h3>Password Generator</h3>
-                <p>Create strong random passwords instantly 🔐</p>
-
-                <a href="projectforcontributor/PasswordGenerator/password.html" class="project-link">
-                    Open Project
-                </a>
-            </div>
-
-            <div class="project-card">
-                <h3>Generate Identity</h3>
-                <p>Generate Identity </p>
-
-                <a href="projectforcontributor/dev-identity-studio/index.html" class="project-link">
-                    Open Project
-                </a>
-            </div>
-            <div class="project-card">
-                <h3>Number Guessing Game</h3>
-                <p>Guess the hidden number between 1–100 🎯</p>
-
-                <a href="projectforcontributor/NumberGuessGame/guess.html" class="project-link">
-                    Open Project
-                </a>
-            </div>
-
-            <div class="project-card">
-                <h3>Tic Tac Toe</h3>
-                <p>Classic 2-player game 🎮 play with a friend!</p>
-
-                <a href="projectforcontributor/TicTacToe/tictactoe.html" class="project-link">
-                    Open Project
-                </a>
-            </div>
-
-
+            <nav id="home-nav" class="home-nav" aria-label="Main Navigation">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contribute.html">How to Contribute</a>
+                <a href="mini-project-guidelines/index.html">Guidelines</a>
+                <a href="contact.html">Contact</a>
+                <a class="active" href="projects.html">Projects</a>
+                <div class="nav-profile">
+                    <span id="navUsername" class="nav-user"></span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </nav>
         </div>
-    </section>
+    </header>
 
+    <main class="projects-page">
+        <section class="projects-hero">
+            <p class="projects-eyebrow" data-motion="fade" data-motion-on="load">Community Showcase</p>
+            <h1 data-motion="stagger" data-stagger="letters" data-motion-on="load">Projects</h1>
+            <p data-motion="slide" data-motion-on="load" data-motion-delay="180ms">
+                Add your own and explore community-built projects.
+            </p>
+            <div class="projects-meta" data-motion="slide" data-motion-on="load" data-motion-delay="260ms">
+                <span>Beginner Friendly</span>
+                <span>Open Source</span>
+                <span>Web Projects</span>
+            </div>
+        </section>
+
+        <section class="mini-projects">
+            <h2 data-motion="stagger" data-stagger="words" data-motion-on="scroll">Mini Project Examples</h2>
+
+            <div class="projects-container">
+                <div class="project-card">
+                    <h3 data-motion="fade" data-motion-on="scroll">Cute Calculator</h3>
+                    <p>A pastel pink calculator mini-project example.</p>
+                    <a href="projectforcontributor/MiniCalculator/calculator.html" class="project-link">Open Project</a>
+                </div>
+
+                <div class="project-card">
+                    <h3 data-motion="fade" data-motion-on="scroll">Future Letters</h3>
+                    <p>Write a letter to your future self.</p>
+                    <a href="https://letter-to-my-future-self.vercel.app/" class="project-link" target="_blank" rel="noopener noreferrer">Open Project</a>
+                    <a href="https://github.com/RishiMaskare/letter-to-my-future-self" class="github-link" target="_blank" rel="noopener noreferrer">View GitHub Repo</a>
+                </div>
+
+                <div class="project-card">
+                    <h3 data-motion="fade" data-motion-on="scroll">Pastel To-Do App</h3>
+                    <p>A cute task manager with local storage.</p>
+                    <a href="projectforcontributor/TodoApp/todo.html" class="project-link">Open Project</a>
+                </div>
+
+                <div class="project-card">
+                    <h3 data-motion="fade" data-motion-on="scroll">Password Generator</h3>
+                    <p>Create strong random passwords instantly.</p>
+                    <a href="projectforcontributor/PasswordGenerator/password.html" class="project-link">Open Project</a>
+                </div>
+
+                <div class="project-card">
+                    <h3 data-motion="fade" data-motion-on="scroll">Generate Identity</h3>
+                    <p>Build a polished developer identity card.</p>
+                    <a href="projectforcontributor/dev-identity-studio/index.html" class="project-link">Open Project</a>
+                </div>
+
+                <div class="project-card">
+                    <h3 data-motion="fade" data-motion-on="scroll">Number Guessing Game</h3>
+                    <p>Guess the hidden number between 1 and 100.</p>
+                    <a href="projectforcontributor/NumberGuessGame/guess.html" class="project-link">Open Project</a>
+                </div>
+
+                <div class="project-card">
+                    <h3 data-motion="fade" data-motion-on="scroll">Tic Tac Toe</h3>
+                    <p>Classic 2-player game. Play with a friend.</p>
+                    <a href="projectforcontributor/TicTacToe/tictactoe.html" class="project-link">Open Project</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <p class="site-footer-title">Open Source Mini Projects</p>
+            <p class="site-footer-note">Where ideas become mini projects and contributions become growth.</p>
+            <div class="site-footer-highlights" aria-label="Community highlights">
+                <span>Open Source</span>
+                <span>Beginner Friendly</span>
+                <span>Community Driven</span>
+            </div>
+            <p class="site-footer-meta">&#169; <span class="footer-year">2026</span> Open Source Mini Projects &#128150;</p>
+        </div>
+    </footer>
+
+    <div class="cursor">
+        <video src="Assest/butterfly.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+    </div>
+    <div class="sparkle-container"></div>
+
+    <script src="auth.js"></script>
+    <script>
+        checkAuth();
+        showLoggedInUser();
+    </script>
+    <script src="script.js"></script>
 </body>
-
 </html>
+
