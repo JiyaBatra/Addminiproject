@@ -20,12 +20,11 @@ body {
         radial-gradient(circle at 92% 5%, rgba(170, 197, 255, 0.34), transparent 36%),
         linear-gradient(135deg, #fdf6f0, #f8e8ee, #e4f0f6);
     min-height: 100vh;
-    padding: 0 18px;
     color: var(--projects-text);
 }
 
 .projects-page {
-    width: min(1180px, 100%);
+    width: min(1180px, calc(100% - 36px));
     margin: clamp(12px, 2.5vw, 28px) auto 0;
 }
 
@@ -246,11 +245,8 @@ body {
 }
 
 @media (max-width: 560px) {
-    body {
-        padding: 0 12px;
-    }
-
     .projects-page {
+        width: calc(100% - 24px);
         margin-top: 14px;
     }
 

@@ -6,9 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Open Source Mini Projects</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="3d-effects.css" />
 </head>
 
-<body>
+<body class="home-page">
+  <div class="home-scene" aria-hidden="true">
+    <span class="scene-blob scene-blob-a" data-depth style="--depth-factor: 1.15; --layer-z: 120px;"></span>
+    <span class="scene-blob scene-blob-b" data-depth style="--depth-factor: 0.85; --layer-z: 90px;"></span>
+    <span class="scene-blob scene-blob-c" data-depth style="--depth-factor: 1.45; --layer-z: 150px;"></span>
+    <span class="scene-ring scene-ring-a" data-depth style="--depth-factor: 0.45; --layer-z: 50px;"></span>
+    <span class="scene-ring scene-ring-b" data-depth style="--depth-factor: 0.62; --layer-z: 72px;"></span>
+    <span class="scene-grid" data-depth style="--depth-factor: 0.28; --layer-z: 24px;"></span>
+  </div>
 
   <header class="home-header">
     <div class="home-header-inner">
@@ -45,30 +54,51 @@
   </header>
 
   <section class="hero">
-    <h2 data-motion="stagger" data-stagger="letters" data-motion-on="load">Build. Share. Grow. Together.</h2>
-    <p data-motion="slide" data-motion-on="load" data-motion-delay="220ms">
-      Anyone can contribute by adding mini projects inside the projects folder &#128150;
-    </p>
+    <div class="hero-panel">
+      <div class="hero-copy">
+        <h2 data-motion="stagger" data-stagger="letters" data-motion-on="load">Build. Share. Grow. Together.</h2>
+        <p data-motion="slide" data-motion-on="load" data-motion-delay="220ms">
+          Anyone can contribute by adding mini projects inside the projects folder &#128150;
+        </p>
+      </div>
+
+      <div class="hero-depth" aria-hidden="true">
+        <span class="hero-orb hero-orb-a" data-depth style="--depth-factor: 0.9; --layer-z: 70px;"></span>
+        <span class="hero-orb hero-orb-b" data-depth style="--depth-factor: 0.55; --layer-z: 40px;"></span>
+        <div class="hero-glass-card" data-home-tilt>
+          <span class="hero-chip">Pastel UI</span>
+          <span class="hero-chip">3D Depth</span>
+          <span class="hero-chip">Open Source</span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="projects">
-    <h2 data-motion="stagger" data-stagger="words" data-motion-on="scroll">Community Projects</h2>
-    <p data-motion="fade" data-motion-on="scroll" data-motion-delay="120ms">Explore projects inside the
-      <strong>projects</strong> folder.
-    </p>
+    <div class="projects-stage" aria-hidden="true">
+      <span class="projects-stage-line projects-stage-line-a" data-depth style="--depth-factor: 0.42; --layer-z: 34px;"></span>
+      <span class="projects-stage-line projects-stage-line-b" data-depth style="--depth-factor: 0.65; --layer-z: 54px;"></span>
+    </div>
 
-    <h2 data-motion="stagger" data-stagger="words" data-motion-on="scroll">Mini Project Example &#129655;</h2>
+    <div class="projects-copy">
+      <h2 data-motion="stagger" data-stagger="words" data-motion-on="scroll">Community Projects</h2>
+      <p data-motion="fade" data-motion-on="scroll" data-motion-delay="120ms">Explore projects inside the
+        <strong>projects</strong> folder.
+      </p>
+
+      <h2 data-motion="stagger" data-stagger="words" data-motion-on="scroll">Mini Project Example &#129655;</h2>
+    </div>
 
     <section class="mini-projects">
       <div class="projects-container">
 
-        <div class="project-card">
+        <div class="project-card" data-home-tilt>
           <h3>Cute Calculator</h3>
           <p>A pastel pink calculator mini-project example &#128150;</p>
           <a href="projectforcontributor/MiniCalculator/calculator.html" class="project-link">Open Project</a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-home-tilt>
           <h3>Future Letters</h3>
           <p>Write a letter to your future self &#128140;</p>
           <a href="https://letter-to-my-future-self.vercel.app/" class="project-link" target="_blank"
@@ -79,31 +109,31 @@
           </a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-home-tilt>
           <h3>Pastel To-Do App</h3>
           <p>A cute task manager with local storage &#127800;</p>
           <a href="projectforcontributor/TodoApp/todo.html" class="project-link">Open Project</a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-home-tilt>
           <h3>Password Generator</h3>
           <p>Create strong random passwords instantly &#128274;</p>
           <a href="projectforcontributor/PasswordGenerator/password.html" class="project-link">Open Project</a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-home-tilt>
           <h3>Number Guessing Game</h3>
           <p>Guess the hidden number between 1-100 &#127919;</p>
           <a href="projectforcontributor/NumberGuessGame/guess.html" class="project-link">Open Project</a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-home-tilt>
           <h3>Dev Identity Studio</h3>
           <p>Build, style, and download a premium developer identity card.</p>
           <a href="projectforcontributor/dev-identity-studio/index.html" class="project-link">Open Project</a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-home-tilt>
           <h3>Tic Tac Toe</h3>
           <p>Classic 2-player game &#127918; Play with a friend!</p>
 
