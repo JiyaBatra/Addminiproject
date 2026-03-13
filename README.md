@@ -35,7 +35,7 @@ Every contribution helps others learn, grow, and inspire creativity.
 
 Addminiproject/ <br>
 │ <br>
-├── Assest/ # Contains images, cursor gifs, and other media <br>
+├── Assets/ # Contains images, cursor gifs, and other media <br>
 │ └── butterfly.gif # Example cursor animation <br>
 ├── projectforcontributor/ # Folder for mini projects submitted by contributors <br>
 │ ├── calculator.html # Example pastel pink calculator project<br>
