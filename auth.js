@@ -6,6 +6,7 @@ function getMainPagePath(fileName) {
 
 const USER_STORAGE_KEY = "user";
 const AUTH_SESSION_KEY = "authSession";
+const PASSWORD_RESET_EMAIL_KEY = "passwordResetEmail";
 const SESSION_DURATION_MS = 2 * 60 * 60 * 1000;
 const HASH_ITERATIONS = 120000;
 
@@ -76,6 +77,18 @@ function getStoredUser() {
 
 function storeUser(userRecord) {
   localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userRecord));
+}
+
+function setPasswordResetEmail(email) {
+  localStorage.setItem(PASSWORD_RESET_EMAIL_KEY, normalizeEmail(email));
+}
+
+function getPasswordResetEmail() {
+  return normalizeEmail(localStorage.getItem(PASSWORD_RESET_EMAIL_KEY));
+}
+
+function clearPasswordResetEmail() {
+  localStorage.removeItem(PASSWORD_RESET_EMAIL_KEY);
 }
 
 async function derivePasswordHash(password, saltBytes, iterations) {
@@ -311,6 +324,106 @@ if (signinForm) {
       error.textContent = "Invalid email or password";
     } catch (_error) {
       error.textContent = "Login failed. Please try again.";
+    }
+  });
+}
+
+/* Forgot password */
+const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const email = normalizeEmail(document.getElementById("resetEmail").value);
+    const error = document.getElementById("forgotError");
+    const success = document.getElementById("forgotSuccess");
+    const resetLinkArea = document.getElementById("resetLinkArea");
+    const storedUser = getStoredUser();
+
+    error.textContent = "";
+    success.textContent = "";
+    resetLinkArea.hidden = true;
+
+    if (!isValidEmail(email)) {
+      error.textContent = "Please enter a valid email address.";
+      return;
+    }
+
+    if (!storedUser || normalizeEmail(storedUser.email) !== email) {
+      error.textContent = "Email not found!";
+      clearPasswordResetEmail();
+      return;
+    }
+
+    setPasswordResetEmail(email);
+    success.textContent = "Reset link generated (demo). Click the link below to continue.";
+    resetLinkArea.hidden = false;
+  });
+}
+
+/* Reset password */
+const resetPasswordForm = document.getElementById("resetPasswordForm");
+
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const newPassword = document.getElementById("newPassword").value;
+    const confirmNewPassword = document.getElementById("confirmNewPassword").value;
+    const error = document.getElementById("resetError");
+    const success = document.getElementById("resetSuccess");
+
+    error.textContent = "";
+    success.textContent = "";
+
+    const resetEmail = getPasswordResetEmail();
+    if (!resetEmail) {
+      error.textContent = "Reset session expired. Start from Forgot Password again.";
+      return;
+    }
+
+    const passwordMessage = validatePasswordStrength(newPassword);
+    if (passwordMessage) {
+      error.textContent = passwordMessage;
+      return;
+    }
+
+    if (newPassword !== confirmNewPassword) {
+      error.textContent = "Passwords do not match!";
+      return;
+    }
+
+    const storedUser = getStoredUser();
+    if (!storedUser || normalizeEmail(storedUser.email) !== resetEmail) {
+      error.textContent = "No matching user found for password reset.";
+      clearPasswordResetEmail();
+      return;
+    }
+
+    try {
+      const hashed = await hashPassword(newPassword);
+      const updatedUser = {
+        ...storedUser,
+        version: 2,
+        email: resetEmail,
+        passwordHash: hashed.hash,
+        salt: hashed.salt,
+        iterations: hashed.iterations,
+        updatedAt: new Date().toISOString(),
+      };
+      delete updatedUser.password;
+
+      storeUser(updatedUser);
+      clearPasswordResetEmail();
+      clearSession();
+      success.textContent = "Password updated successfully. Redirecting to Sign In...";
+
+      setTimeout(() => {
+        window.location.href = getMainPagePath("signin.html");
+      }, 1200);
+    } catch (_error) {
+      error.textContent = "Unable to reset password right now. Please try again.";
     }
   });
 }

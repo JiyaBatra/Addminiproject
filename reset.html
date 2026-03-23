@@ -4,38 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' data: https://cdnjs.cloudflare.com; media-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests">
-  <title>Sign In</title>
+  <title>Reset Password</title>
   <link rel="stylesheet" href="auth.css">
 </head>
 
 <body class="auth-page">
   <div class="auth-container">
-    <form id="signinForm">
-      <h2>Login</h2>
+    <form id="resetPasswordForm">
+      <h2>Reset Password</h2>
 
       <div class="input-group">
-        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="newPassword" placeholder="New Password" required>
+        <span class="toggle-password" onclick="togglePassword('newPassword', this)">&#128065;</span>
       </div>
 
       <div class="input-group">
-        <input type="password" id="loginPassword" placeholder="Password" required>
-        <span class="toggle-password" onclick="togglePassword('loginPassword', this)">&#128065;</span>
+        <input type="password" id="confirmNewPassword" placeholder="Confirm New Password" required>
+        <span class="toggle-password" onclick="togglePassword('confirmNewPassword', this)">&#128065;</span>
       </div>
 
-      <div class="error" id="loginError"></div>
+      <div class="error" id="resetError"></div>
+      <div class="auth-message" id="resetSuccess"></div>
 
-      <p class="auth-inline-link"><a href="forgot.html">Forgot Password?</a></p>
-
-      <button type="submit">Sign In</button>
-      <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+      <button type="submit">Update Password</button>
+      <p><a href="signin.html">Back to Sign In</a></p>
     </form>
   </div>
 
   <script src="auth.js"></script>
-  <script>
-    if (hasActiveSession()) {
-      window.location.href = "index.html";
-    }
-  </script>
 </body>
 </html>
