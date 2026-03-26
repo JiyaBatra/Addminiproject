@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' data: https://cdnjs.cloudflare.com; media-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests">
+  <title>Forgot Password</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+
+<body class="auth-page">
+  <div class="auth-container">
+    <form id="forgotPasswordForm">
+      <h2>Forgot Password</h2>
+
+      <div class="input-group">
+        <input type="email" id="resetEmail" placeholder="Enter your email" required>
+      </div>
+
+      <div class="error" id="forgotError"></div>
+      <div class="auth-message" id="forgotSuccess"></div>
+
+      <button type="submit">Generate Reset Link</button>
+
+      <p id="resetLinkArea" class="auth-message" hidden>
+        Reset link ready:
+        <a href="reset.html">Reset Password</a>
+      </p>
+
+      <p>Remembered your password? <a href="signin.html">Back to Sign In</a></p>
+    </form>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
