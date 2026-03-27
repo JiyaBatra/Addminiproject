@@ -1,3 +1,42 @@
+/* ================= THEME VARIABLES ================= */
+:root {
+  /* Light Theme */
+  --auth-bg: linear-gradient(135deg, #fdf6f0, #f8e8ee, #e4f0f6);
+  --auth-card-bg: rgba(255, 255, 255, 0.6);
+  --auth-card-border: rgba(255, 255, 255, 0.85);
+  --auth-shadow: rgba(113, 79, 127, 0.18);
+  --auth-text: #5c5470;
+  --auth-heading: #6d4e86;
+  --auth-label: #6d4e86;
+  --auth-input-bg: rgba(255, 255, 255, 0.5);
+  --auth-input-border: #d4b8d1;
+  --auth-input-text: #5c5470;
+  --auth-focus: #e953b0;
+  --auth-button-bg: #e953b0;
+  --auth-button-hover: #d640a0;
+  --auth-button-text: #ffffff;
+  --auth-link: #7a5c8e;
+}
+
+html.dark-theme {
+  /* Dark Theme */
+  --auth-bg: linear-gradient(135deg, #1a1625, #221829, #1f1e2e);
+  --auth-card-bg: rgba(30, 25, 40, 0.85);
+  --auth-card-border: rgba(212, 148, 209, 0.2);
+  --auth-shadow: rgba(0, 0, 0, 0.4);
+  --auth-text: #d4c5e0;
+  --auth-heading: #d494d1;
+  --auth-label: #c0b0d0;
+  --auth-input-bg: rgba(40, 32, 55, 0.6);
+  --auth-input-border: #5d4a7a;
+  --auth-input-text: #d4c5e0;
+  --auth-focus: #ff8fa3;
+  --auth-button-bg: #ff8fa3;
+  --auth-button-hover: #ff7eb8;
+  --auth-button-text: #1a1625;
+  --auth-link: #c9a5d1;
+}
+
 /* ================= GLOBAL ================= */
 *{
   box-sizing:border-box;
@@ -13,15 +52,9 @@ body{
   justify-content:center;
   align-items:center;
 
-  /* SAME pastel gradient as main website */
-  background: linear-gradient(
-    135deg,
-    #fdf6f0,
-    #f8e8ee,
-    #e4f0f6
-  );
-
-  color:#5c5470;
+  background: var(--auth-bg);
+  color: var(--auth-text);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* ================= AUTH CARD ================= */
@@ -30,24 +63,21 @@ body{
   padding:45px;
   border-radius:26px;
 
-  /* pastel glass effect */
-  background: rgba(255,255,255,0.6);
+  background: var(--auth-card-bg);
   backdrop-filter: blur(15px);
-
-  border:1px solid rgba(255,255,255,0.85);
-
-  box-shadow:
-    0 16px 45px rgba(113,79,127,0.18);
-
+  border: 1px solid var(--auth-card-border);
+  box-shadow: 0 16px 45px var(--auth-shadow);
   text-align:center;
   animation: authCardIn 700ms cubic-bezier(0.22,1,0.36,1) both;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* ================= TITLE ================= */
 h2{
   font-family:'Playfair Display', serif;
-  color:#6d4e86;
+  color: var(--auth-heading);
   margin-bottom:28px;
+  transition: color 0.3s ease;
   font-weight:600;
   letter-spacing:0.5px;
   animation: authTitleIn 760ms cubic-bezier(0.22,1,0.36,1) both;

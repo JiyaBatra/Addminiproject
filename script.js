@@ -1,6 +1,64 @@
 // Create butterfly cursor (desktop only)
 document.documentElement.classList.add("js-ready");
 
+// ============ THEME TOGGLE FUNCTIONALITY ============
+function initThemeToggle() {
+    const themeToggle = document.getElementById("themeToggle");
+    const htmlElement = document.documentElement;
+    
+    if (!themeToggle) {
+        console.warn("Theme toggle button not found");
+        return;
+    }
+    
+    // Check for saved theme preference (default to light)
+    const savedTheme = localStorage.getItem("theme") || "light";
+    
+    // Apply saved theme on page load
+    if (savedTheme === "dark") {
+        htmlElement.classList.add("dark-theme");
+        updateThemeIcon();
+    }
+    
+    // Toggle theme on button click
+    themeToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isDarkMode = htmlElement.classList.toggle("dark-theme");
+        
+        // Update localStorage
+        try {
+            localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+        } catch (e) {
+            console.warn("localStorage not available:", e);
+        }
+        
+        updateThemeIcon();
+    });
+}
+
+function updateThemeIcon() {
+    const themeToggle = document.getElementById("themeToggle");
+    const htmlElement = document.documentElement;
+    
+    if (!themeToggle) return;
+    
+    const isDark = htmlElement.classList.contains("dark-theme");
+    const themeIcon = themeToggle.querySelector(".theme-icon");
+    
+    if (themeIcon) {
+        themeIcon.textContent = isDark ? "☀️" : "🌙";
+    }
+}
+
+// Initialize theme toggle when DOM is ready
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initThemeToggle);
+} else {
+    initThemeToggle();
+}
+
 const cursor = document.querySelector(".cursor");
 const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
