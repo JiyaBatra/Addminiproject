@@ -1,10 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 :root {
+    /* Light Theme */
+    --projects-bg: linear-gradient(135deg, #fdf6f0, #f8e8ee, #e4f0f6);
+    --projects-card-bg: linear-gradient(140deg, rgba(255, 255, 255, 0.82), rgba(252, 238, 247, 0.78), rgba(235, 245, 255, 0.82));
+    --projects-card-border: rgba(255, 255, 255, 0.85);
+    --projects-shadow: rgba(108, 79, 132, 0.14);
     --projects-accent: #ff6db3;
     --projects-accent-2: #a77bf7;
     --projects-text: #5c5470;
     --projects-soft-text: #6f6585;
+}
+
+html.dark-theme {
+    /* Dark Theme */
+    --projects-bg: linear-gradient(135deg, #1a1625, #221829, #1f1e2e);
+    --projects-card-bg: linear-gradient(140deg, rgba(30, 25, 40, 0.85), rgba(35, 25, 45, 0.8), rgba(25, 20, 40, 0.85));
+    --projects-card-border: rgba(212, 148, 209, 0.2);
+    --projects-shadow: rgba(0, 0, 0, 0.4);
+    --projects-accent: #ff8fa3;
+    --projects-accent-2: #d494d1;
+    --projects-text: #d4c5e0;
+    --projects-soft-text: #c0b0d0;
 }
 
 * {
@@ -15,12 +32,10 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background:
-        radial-gradient(circle at 8% 10%, rgba(255, 182, 214, 0.34), transparent 34%),
-        radial-gradient(circle at 92% 5%, rgba(170, 197, 255, 0.34), transparent 36%),
-        linear-gradient(135deg, #fdf6f0, #f8e8ee, #e4f0f6);
+    background: var(--projects-bg);
     min-height: 100vh;
     color: var(--projects-text);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .projects-page {
@@ -35,10 +50,11 @@ body {
     max-width: 960px;
     padding: clamp(24px, 4vw, 38px) clamp(20px, 4vw, 34px);
     border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.85);
-    background: linear-gradient(140deg, rgba(255, 255, 255, 0.82), rgba(252, 238, 247, 0.78), rgba(235, 245, 255, 0.82));
-    box-shadow: 0 20px 45px rgba(108, 79, 132, 0.14);
+    border: 1px solid var(--projects-card-border);
+    background: var(--projects-card-bg);
+    box-shadow: 0 20px 45px var(--projects-shadow);
     text-align: center;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .projects-hero::before {
